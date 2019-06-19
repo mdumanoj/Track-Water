@@ -4,6 +4,7 @@
   "description": "Track water can count",
   "main": "index.js",
   "scripts": {
+    "hotstart": "nodemon src/",
     "start": "node src/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,5 +23,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "nano": "^8.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
   }
 }
