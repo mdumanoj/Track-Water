@@ -1,3 +1,11 @@
 .brand-logo {
     font-size: 24px !important;
+    left: 20% !important;
+}
+
+.mt-5 {
+    margin-top: 5rem;
+}
+.text-bold {
+    font-weight: bold;
 }

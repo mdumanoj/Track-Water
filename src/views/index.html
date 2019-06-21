@@ -13,20 +13,21 @@
 
 <body>
     <div class="container-fluid">
-        <nav class="navbar-fixed nav-extended teal">
-            <div class="nav-wrapper">
-                <a href="#" class="brand-logo center">Track Water</a>
-            </div>
-            <div class="nav-content">
-                <ul id="navbar-tab" class="tabs tabs-transparent white-text">
-                    <li class="tab"><a href="#list">List</a></li>
-                    <li class="tab"><a href="#add">Add</a></li>
-                    <li class="tab"><a href="#summary">Summary</a></li>
-                </ul>
-            </div>
-        </nav>
-
-        <div id="list" class="col s12">
+        <div class="navbar-fixed">
+            <nav class="nav-extended green lighten-1">
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo">Track Water</a>
+                </div>
+                <div class="nav-content">
+                    <ul id="navbar-tab" class="tabs tabs-transparent white-text">
+                        <li class="tab"><a href="#list">List</a></li>
+                        <li class="tab"><a href="#add">Add</a></li>
+                        <li class="tab"><a href="#summary">Summary</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div id="list" class="col s12 mt-5">
             <div class="container">
                 <div class="input-field col s8">
                     <select>
@@ -37,16 +38,45 @@
                     <label>Select Month</label>
                 </div>
                 <div class="col s12">
-                    <span>Total Can : 10 * 35 : 350rs</span>
+                    <blockquote><span class="text-bold">Total Can :</span> 10 x 35 : 350rs</blockquote>
                 </div>
-                <div class="row card-panel blue-grey lighten-5">
-                    <div class="col s4">One</div>
-                    <div class="col s4">Two</div>
-                    <div class="col s4">Three</div>
+                <div class="row card-panel blue-grey lighten-5 z-depth-2">
+                    <div class="col s4">
+                        <span class="text-bold">Date:</span>
+                        <br>
+                        <span>Jun 21, 2019</span>
+                    </div>
+                    <div class="col s4">
+                        <span class="text-bold">By:</span>
+                        <br>
+                        <span>Manoj</span>
+                    </div>
+                    <div class="col s4">
+                        <span class="text-bold">Count:</span>
+                        <br>
+                        <span>2</span>
+                    </div>
+                </div>
+                <div class="row card-panel blue-grey lighten-5 z-depth-2">
+                    <div class="col s4">
+                        <span class="text-bold">Date:</span>
+                        <br>
+                        <span>Jun 21, 2019</span>
+                    </div>
+                    <div class="col s4">
+                        <span class="text-bold">By:</span>
+                        <br>
+                        <span>Manoj</span>
+                    </div>
+                    <div class="col s4">
+                        <span class="text-bold">Count:</span>
+                        <br>
+                        <span>2</span>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="add" class="col s12">
+        <div id="add" class="col s12 mt-5">
             <div class="container">
                 <form>
                     <div class="input-field col s12">
@@ -78,7 +108,7 @@
                 </form>
             </div>
         </div>
-        <div id="summary" class="col s12">Summary page</div>
+        <div id="summary" class="col s12 mt-5">Summary page</div>
     </div>
     <!--JavaScript at end of body for optimized loading-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

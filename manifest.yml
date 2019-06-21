@@ -1,0 +1,4 @@
+applications:
+- name: "Track Water"
+  random-route: true
+  memory: 256M
