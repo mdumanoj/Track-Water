@@ -12,9 +12,23 @@
 </head>
 
 <body>
+    <div id="loader" class="preloader-wrapper hide active">
+        <div class="spinner-layer spinner-red-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+    <div id="overlay" class="hide grey"></div>
     <div class="container-fluid">
         <div class="navbar-fixed">
-            <nav class="nav-extended green lighten-1">
+            <nav class="nav-extended pink darken-4">
                 <div class="nav-wrapper">
                     <a href="#" class="brand-logo">Track Water</a>
                 </div>
@@ -40,7 +54,7 @@
                 <div class="col s12">
                     <blockquote><span class="text-bold">Total Can :</span> 10 x 35 : 350rs</blockquote>
                 </div>
-                <div class="row card-panel blue-grey lighten-5 z-depth-2">
+                <div class="row card-panel blue lighten-4 z-depth-2">
                     <div class="col s4">
                         <span class="text-bold">Date:</span>
                         <br>
@@ -57,7 +71,7 @@
                         <span>2</span>
                     </div>
                 </div>
-                <div class="row card-panel blue-grey lighten-5 z-depth-2">
+                <div class="row card-panel blue lighten-4 z-depth-2">
                     <div class="col s4">
                         <span class="text-bold">Date:</span>
                         <br>
@@ -78,17 +92,17 @@
         </div>
         <div id="add" class="col s12 mt-5">
             <div class="container">
-                <form>
+                <form id="add-can">
                     <div class="input-field col s12">
-                        <input id="can-date" type="text" class="datepicker">
-                        <label for="can-date">Date</label>
+                        <input id="date" type="text" class="datepicker">
+                        <label for="date">Date</label>
                     </div>
                     <div class="input-field col s12">
-                        <input id="count" type="number" class="">
+                        <input id="count" type="number">
                         <label for="count">Count</label>
                     </div>
                     <div class="input-field col s12">
-                        <select>
+                        <select id="by">
                             <option value="ashok">Ashok</option>
                             <option value="barath">Barath</option>
                             <option value="kaushik">Kaushik</option>
@@ -101,7 +115,7 @@
                         <label>Select Guy</label>
                     </div>
                     <div class="input-field col s12 right">
-                        <button class="btn waves-effect waves-light" type="button" name="action">Add
+                        <button class="btn waves-effect waves-light" type="button" name="action" onclick="addCan()">Add
                             <i class="material-icons right">send</i>
                         </button>
                     </div>

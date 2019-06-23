@@ -9,3 +9,16 @@
 .text-bold {
     font-weight: bold;
 }
+#loader {
+    position: fixed;
+    top : 30%;
+    left : 40%;
+    z-index: 998;
+}
+#overlay {
+    position: fixed;
+    opacity: 0.5;
+    height: 100%;
+    width: 100%;
+    z-index: 999;
+}
