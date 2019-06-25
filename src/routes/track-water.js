@@ -21,6 +21,11 @@ router.post('/', (req, res) => {
 router.get('/month/:month', (req, res) => {
     db.find({ selector: { month: +req.params.month } })
         .then(result => {
+            if(result.docs.length != 0) {
+                result.docs.sort((a,b) => {
+                    return new Date(b.date) - new Date(a.date);
+                });
+            }
             let responseObj = {
                 code: 'TW_001',
                 message: 'success',

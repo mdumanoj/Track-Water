@@ -6,7 +6,7 @@
         // Navbar Tabs
         var navbarTab = document.getElementById('navbar-tab');
         window.tabInstance = M.Tabs.init(navbarTab);
-        window.tabInstance.select('list');
+        gotoListTab(new Date().getMonth()+1);
 
         // Select Option
         var selectElement = document.querySelectorAll('select');
@@ -30,6 +30,27 @@ var fetchRequest = (url, reqOptions) => {
         .catch(function (error) {
             throw 'Error !';
         });
+}
+
+/**
+ * Creates a div element with given class attributes
+ * @param {*} classNames 
+ */
+function createDiv(classNames) {
+    let div = document.createElement('div');
+    div.setAttribute('class', classNames);
+    return div;
+}
+
+/**
+ * Removes all child element of given id element
+ * @param {*} divId 
+ */
+function removeAllChildElement(divId) {
+    var myNode = document.getElementById(divId);
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
 }
 
 /**
@@ -76,12 +97,74 @@ async function getList() {
 
 /**
  * Change tab to list and populate data
+ * @param {*} month 
  */
-async function gotoListTab() {
+async function gotoListTab(month) {
     window.tabInstance.select('list');
-    var data = await getList();
+
+    if(month) {
+        let monthElement = document.getElementById('month');
+        monthElement.value = month;
+    }
+    
+    let data = await getList();
+    removeAllChildElement('list-content');
+    let listContent = document.getElementById('list-content');
+    
+    if (data.length == 0) {
+        let h4 = document.createElement('h4');
+        h4.setAttribute('class', 'center mt-5 grey-text');
+        h4.innerText = 'No data found';
+        listContent.appendChild(h4);
+        return;
+    }
+
+    let total = data.map(d => d.count).reduce((p, n) => p + n);
+    let div = createDiv('col s12');
+    let blockquote = document.createElement('blockquote');
+    blockquote.innerHTML = '<span class="text-bold">Total Can : </span>' + total + ' x 35 : ' + total*35 + 'rs';
+    div.appendChild(blockquote);
+    listContent.appendChild(div);
     data.forEach(d => {
-        
+        let panelDiv = createDiv('row card-panel blue lighten-4 z-depth-2');
+
+        let colDiv = createDiv('col s4');
+        panelDiv.appendChild(colDiv);
+        let labelSpan = document.createElement('span');
+        labelSpan.classList.add('text-bold');
+        labelSpan.innerText = 'Date:';
+        let br = document.createElement('br');
+        let valueSpan = document.createElement('span');
+        valueSpan.innerText = d.date;
+        colDiv.appendChild(labelSpan);
+        colDiv.appendChild(br);
+        colDiv.appendChild(valueSpan);
+
+        colDiv = createDiv('col s4');
+        panelDiv.appendChild(colDiv);
+        labelSpan = document.createElement('span');
+        labelSpan.classList.add('text-bold');
+        labelSpan.innerText = 'By:';
+        br = document.createElement('br');
+        valueSpan = document.createElement('span');
+        valueSpan.innerText = d.by;
+        colDiv.appendChild(labelSpan);
+        colDiv.appendChild(br);
+        colDiv.appendChild(valueSpan);
+
+        colDiv = createDiv('col s4');
+        panelDiv.appendChild(colDiv);
+        labelSpan = document.createElement('span');
+        labelSpan.classList.add('text-bold');
+        labelSpan.innerText = 'Count:';
+        br = document.createElement('br');
+        valueSpan = document.createElement('span');
+        valueSpan.innerText = d.count;
+        colDiv.appendChild(labelSpan);
+        colDiv.appendChild(br);
+        colDiv.appendChild(valueSpan);
+
+        listContent.appendChild(panelDiv);
     });
 }
 
@@ -121,6 +204,6 @@ function addCan() {
             hideLoader();
             M.Toast.dismissAll();
             M.toast({ html: 'Can added successfully', classes: 'green rounded' });
-            gotoListTab();
+            gotoListTab(new Date().getMonth()+1);
         });
 }
