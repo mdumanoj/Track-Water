@@ -5,8 +5,8 @@
     document.addEventListener('DOMContentLoaded', function () {
         // Navbar Tabs
         var navbarTab = document.getElementById('navbar-tab');
-        var tabInstance = M.Tabs.init(navbarTab);
-        tabInstance.select('list');
+        window.tabInstance = M.Tabs.init(navbarTab);
+        window.tabInstance.select('list');
 
         // Select Option
         var selectElement = document.querySelectorAll('select');
@@ -54,6 +54,37 @@ function hideLoader() {
     overlay.classList.add('hide');
 }
 
+
+/**
+ * Get list data from database to populate in List Tab
+ */
+async function getList() {
+    showLoader();
+    let reqOptions = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    };
+    var month = +document.getElementById('month').value;
+    return await fetchRequest('api/track-water/month/' + month, reqOptions)
+        .then(resp => {
+            hideLoader();
+            return resp.data;
+        });
+}
+
+/**
+ * Change tab to list and populate data
+ */
+async function gotoListTab() {
+    window.tabInstance.select('list');
+    var data = await getList();
+    data.forEach(d => {
+        
+    });
+}
+
 /**
  * Add can data to database
  */
@@ -63,7 +94,7 @@ function addCan() {
     let payload = {
         date: form.elements.date.value,
         month: new Date(form.elements.date.value).getMonth() + 1,
-        count: form.elements.count.value,
+        count: +form.elements.count.value,
         by: form.elements.by.value
     };
 
@@ -90,5 +121,6 @@ function addCan() {
             hideLoader();
             M.Toast.dismissAll();
             M.toast({ html: 'Can added successfully', classes: 'green rounded' });
+            gotoListTab();
         });
 }
