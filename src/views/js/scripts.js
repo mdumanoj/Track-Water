@@ -181,7 +181,7 @@ function addCan() {
         by: form.elements.by.value
     };
 
-    if (payload.count == '' || payload.count == "0") {
+    if (payload.count == '' || payload.count <= "0") {
         M.Toast.dismissAll();
         M.toast({ html: 'Count cannot be 0 or empty', classes: 'red rounded' });
         return;
