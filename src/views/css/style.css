@@ -22,3 +22,11 @@
     width: 100%;
     z-index: 999;
 }
+.bahubali-img {
+    top: 25px;
+    height: 50px !important;
+    width: 50px !important;
+}
+.collection .collection-item.avatar .secondary-content {
+    top: 30px !important;
+}

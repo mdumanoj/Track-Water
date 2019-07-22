@@ -7,7 +7,7 @@
         var navbarTab = document.getElementById('navbar-tab');
         window.tabInstance = M.Tabs.init(navbarTab);
         gotoListTab(new Date().getMonth()+1);
-
+        
         // Select Option
         var selectElement = document.querySelectorAll('select');
         var selectInstance = M.FormSelect.init(selectElement);
@@ -100,9 +100,8 @@ async function getList() {
  * @param {*} month 
  */
 async function gotoListTab(month) {
-    window.tabInstance.select('list');
 
-    if(month) {
+    if (month) {
         let monthElement = document.getElementById('month');
         monthElement.value = month;
     }
@@ -169,6 +168,13 @@ async function gotoListTab(month) {
 }
 
 /**
+ * Populate data in list tab when user clicks on list tab
+ */
+document.getElementById("list-tab").addEventListener('click',() => {
+    gotoListTab(new Date().getMonth()+1);
+});
+
+/**
  * Add can data to database
  */
 function addCan() {
@@ -207,3 +213,51 @@ function addCan() {
             gotoListTab(new Date().getMonth()+1);
         });
 }
+
+/**
+ * Populate data in summary tab
+ * @param {*} month 
+ */
+function populateSummary(month) {
+    removeAllChildElement('summary-content');
+    let summaryContent = document.getElementById('summary-content');
+    showLoader();
+    let reqOptions = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    };
+    fetchRequest('api/track-water/summary/month/' + month, reqOptions)
+        .then(resp => {
+            let data = resp.data;
+            let li = document.createElement('li');
+            li.setAttribute('class','collection-item avatar z-depth-1 blue lighten-3');
+            
+            let img = document.createElement('img');
+            img.setAttribute('src','img/bahubali-watercan.jpg');
+            img.setAttribute('class','circle bahubali-img');
+            li.appendChild(img);
+
+            let h4 = document.createElement('h4');
+            h4.innerHTML = data[0].name + '<span class="secondary-content black-text">' + data[0].count +'</span>';
+            li.appendChild(h4);
+
+            summaryContent.appendChild(li);
+            for (let i = 1; i< data.length; i++) {
+                li = document.createElement('li');
+                li.setAttribute('class','collection-item blue lighten-4');
+                li.innerHTML = '<div>' + data[i].name + '<span class="secondary-content black-text">' + data[i].count +'</span></div>';
+                summaryContent.appendChild(li);
+            }
+
+            hideLoader();
+        });
+}
+
+/**
+ * Populate data in summary tab when user clicks on summary tab
+ */
+document.getElementById("summary-tab").addEventListener('click',() => {
+    populateSummary(new Date().getMonth()+1);
+});
